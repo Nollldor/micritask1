@@ -5,26 +5,42 @@ import {Body} from "./Body";
 import {Footer} from "./Footer";
 import {NewComponent} from "./NewComponent";
 import {Button} from "./components/Button";
+import {NewComponent1} from "./NewComponent1";
+
+export type FilterType = "all" | 'Dollars' | 'RUBLS';
 
 function App() {
-    let [a, setA] = useState(1);
+    const [money, setMoney] = useState([
+        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
+        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    ])
 
-    const onclickHandler = (current: string) =>{
-        if(current==="+") {
-            setA(++a);
-            console.log(a);
-        }else{
-            setA(a=0);
-            console.log(a);
-        }
+    let [filter, setFilter]= useState<FilterType>("all");
+    let currentMoney = money;
+
+    if(filter==='Dollars'){
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === "Dollars");
+    }else if(filter==='RUBLS'){
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === "RUBLS");
+    }else {
+        currentMoney = money;
+    }
+
+    const onclickFilterHandler = (nameButton: FilterType) => {
+        setFilter(nameButton);
     }
 
     return (
-        <div className="App">
-            <h1>{a}</h1>
-            <button onClick={()=>onclickHandler("+")}>number</button>
-            <button onClick={()=>onclickHandler("0")}>0</button>
-        </div>
+        <>
+            <NewComponent1 currentMoney={currentMoney} callBack={onclickFilterHandler}/>
+
+        </>
     );
 }
 
