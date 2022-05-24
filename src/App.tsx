@@ -4,46 +4,26 @@ import {Header} from "./Header";
 import {Body} from "./Body";
 import {Footer} from "./Footer";
 import {NewComponent} from "./NewComponent";
+import {Button} from "./components/Button";
 
 function App() {
-    /*const students = [
-        {id:0, name: "Arthur", age:30},
-        {id:1, name: "Kristina", age:29}
-    ]
-    const MyFirstSubscriber = (event:MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        console.log("Hello! I am Vasya")
+    const Button1Foo = (subscriber:string, age: number) => {
+        console.log(subscriber, age)
     }
 
-    const MySecondSubscriber = () => {
-        console.log("Hello! I am Ivan")
+    const Button2Foo = (subscriber:string) => {
+        console.log(subscriber)
     }
 
-    const onClickHandler = (name: string) => {
-        console.log(`Hello! I am ${name}`);
-    }*/
-
-    const foo1 = () => {
-        //ничего не передавать
-        console.log(100200);
-    }
-
-    const foo2 = (val: number) => {
-        //передать цифру 100200
-        console.log(val);
+    const stupidButton = () => {
+        console.log("Im stupid button")
     }
 
     return (
         <div className="App">
-            {/*<button onClick={(event)=>{console.log("Hello!")}}>My YouTubeChannel-1</button>
-        <button onClick={() => onClickHandler("Vasya")}>My YouTubeChannel-2</button>
-        <button onClick={() => onClickHandler("Ivan")}>My YouTubeChannel-1</button>
-        <Header title={"NEW Header"}/>
-        <Body titleForBody={"New Body"}/>
-        <NewComponent students={students} />
-        <Footer titleForFooter={"New Footer"}/>*/}
-
-            <button onClick={foo1}>1</button>
-            <button onClick={() => foo2(100200)}>2</button>
+            <Button name={'MyYouTubeChannel-1'} callBack={()=>Button1Foo("Im Vasya", 21)}/>
+            <Button name={'MyYouTubeChannel-2'} callBack={()=>Button2Foo("Im Ivan")}/>
+            <Button name={"stupidButton"} callBack={stupidButton}/>
         </div>
     );
 }
