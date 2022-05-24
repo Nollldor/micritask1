@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Header} from "./Header";
 import {Body} from "./Body";
@@ -7,23 +7,23 @@ import {NewComponent} from "./NewComponent";
 import {Button} from "./components/Button";
 
 function App() {
-    const Button1Foo = (subscriber:string, age: number) => {
-        console.log(subscriber, age)
-    }
+    let [a, setA] = useState(1);
 
-    const Button2Foo = (subscriber:string) => {
-        console.log(subscriber)
-    }
-
-    const stupidButton = () => {
-        console.log("Im stupid button")
+    const onclickHandler = (current: string) =>{
+        if(current==="+") {
+            setA(++a);
+            console.log(a);
+        }else{
+            setA(a=0);
+            console.log(a);
+        }
     }
 
     return (
         <div className="App">
-            <Button name={'MyYouTubeChannel-1'} callBack={()=>Button1Foo("Im Vasya", 21)}/>
-            <Button name={'MyYouTubeChannel-2'} callBack={()=>Button2Foo("Im Ivan")}/>
-            <Button name={"stupidButton"} callBack={stupidButton}/>
+            <h1>{a}</h1>
+            <button onClick={()=>onclickHandler("+")}>number</button>
+            <button onClick={()=>onclickHandler("0")}>0</button>
         </div>
     );
 }
