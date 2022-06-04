@@ -1,58 +1,36 @@
+import {Button} from "./Button";
 import React from "react";
+import {FilterType} from "./App";
 
-type NewComponentPropsType = {
-    students: Array<StudentType>
+
+type MoneyType = {
+    banknots: string,
+    value: number,
+    number: string,
 }
 
-type StudentType = {
-    id: number,
-    name: string,
-    age: number
+type NewComponentPropsType = {
+    money: Array<MoneyType>
+    setNewFilter: (filter : FilterType)=>void
 }
 
 export const NewComponent = (props: NewComponentPropsType) => {
-    const topCars = [
-        {manufacturer:'BMW', model:'m5cs'},
-        {manufacturer:'Mercedes', model:'e63s'},
-        {manufacturer:'Audi', model:'rs6'}
-    ]
-        /*<table>
-        <tr>
-        <th>Month</th>
-    <th>Savings</th>
-</tr>
-    <tr>
-        <td>January</td>
-        <td>$100</td>
-    </tr>
-    <tr>
-        <td>February</td>
-        <td>$80</td>
-    </tr>
-</table>*/
-    return (
-
-        <table>
-            <tr>
-                <th>Manufacturer</th>
-                <th>Model</th>
-
-            </tr>
-            {topCars.map((el, index) =>{
-                return(
-                    <tr key={index}>
-                        <th>{el.manufacturer}</th>
-                        <th >{el.model}</th>
-                    </tr>
-                );
-            })}
-        </table>
-        /*<ul>
-            {props.students.map(el =>{
-                return (
-                  <li key={el.id}>{el.name}</li>
-                );
-            })}
-        </ul>*/
-    );
+    return(
+        <div>
+            <ul>
+                {props.money.map((el, index) => {
+                    return <li key={index}>
+                        <span>{el.banknots} </span>
+                        <span>{el.value} </span>
+                        <span>{el.number}</span>
+                    </li>
+                })}
+            </ul>
+            <div>
+                <Button title={"All"} callBack={()=>props.setNewFilter("All")}/>
+                <Button title={"RUBLS"} callBack={()=>props.setNewFilter("RUBLS")}/>
+                <Button title={"Dollars"} callBack={()=>props.setNewFilter("Dollars")}/>
+            </div>
+        </div>
+    )
 }
